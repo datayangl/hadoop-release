@@ -41,6 +41,9 @@
     <hadoop.component>UNDEF</hadoop.component>
     <bundle.snappy>false</bundle.snappy>
     <bundle.snappy.in.bin>false</bundle.snappy.in.bin>
+    <zstd.lib></zstd.lib>
+    <bundle.zstd>false</bundle.zstd>
+    <bundle.zstd.in.bin>false</bundle.zstd.in.bin>
     <bundle.openssl>false</bundle.openssl>
     <bundle.openssl.in.bin>false</bundle.openssl.in.bin>
   </properties>
@@ -363,6 +366,10 @@
                           cd "${snappy.lib}"
                           $$TAR *snappy* | (cd $${TARGET_DIR}/; $$UNTAR)
                         fi
+                        if [ "${bundle.zstd}" = "true" ] ; then
+                          cd "${zstd.lib}"
+                          $$TAR *zstd* | (cd $${TARGET_DIR}/; $$UNTAR)
+                        fi
                         if [ "${bundle.openssl}" = "true" ] ; then
                           cd "${openssl.lib}"
                           $$TAR *crypto* | (cd $${TARGET_DIR}/; $$UNTAR)
@@ -378,6 +385,12 @@
                           if [ "${bundle.snappy}" = "true" ] ; then
                             cd "${snappy.lib}"
                             $$TAR *snappy* | (cd $${TARGET_BIN_DIR}/; $$UNTAR)
+                          fi
+                        fi
+                        if [ "${bundle.zstd.in.bin}" = "true" ] ; then
+                          if [ "${bundle.zstd}" = "true" ] ; then
+                            cd "${zstd.lib}"
+                            $$TAR *zstd* | (cd $${TARGET_BIN_DIR}/; $$UNTAR)
                           fi
                         fi
                         if [ "${bundle.openssl.in.bin}" = "true" ] ; then

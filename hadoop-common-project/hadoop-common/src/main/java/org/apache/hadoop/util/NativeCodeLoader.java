@@ -84,6 +84,11 @@ public class NativeCodeLoader {
    */
   public static native boolean buildSupportsOpenssl();
 
+  /**
+   * Returns true only if this build was compiled with support for ZStandard.
+   */
+  public static native boolean buildSupportsZstd();
+
   public static native String getLibraryName();
 
   /**
